@@ -26,7 +26,7 @@ public class BlockAkashicRecord extends Block {
             (pos, bs, world) ->
                 world.getBlockEntity(pos) instanceof BlockEntityAkashicBookshelf tile
                     && tile.getPattern() != null && tile.getPattern().sigsEqual(key));
-        var openPos = nil;
+        var openPos = null;
         if (clobbereePos != null) {
            openPos = clobbereePos;
         }
