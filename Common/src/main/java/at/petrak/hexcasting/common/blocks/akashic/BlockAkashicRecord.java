@@ -26,15 +26,16 @@ public class BlockAkashicRecord extends Block {
             (pos, bs, world) ->
                 world.getBlockEntity(pos) instanceof BlockEntityAkashicBookshelf tile
                     && tile.getPattern() != null && tile.getPattern().sigsEqual(key));
-
+        var openPos = nil;
         if (clobbereePos != null) {
-            return null;
+           openPos = clobbereePos
         }
-
-        var openPos = AkashicFloodfiller.floodFillFor(herePos, level, 0.9f,
-            (pos, bs, world) ->
-                world.getBlockEntity(pos) instanceof BlockEntityAkashicBookshelf tile
-                    && tile.getPattern() == null, 128);
+        else{
+            openPos = AkashicFloodfiller.floodFillFor(herePos, level, 0.9f,
+                (pos, bs, world) ->
+                    world.getBlockEntity(pos) instanceof BlockEntityAkashicBookshelf tile
+                        && tile.getPattern() == null, 128);
+        }
         if (openPos != null) {
             var tile = (BlockEntityAkashicBookshelf) level.getBlockEntity(openPos);
             tile.setNewMapping(key, datum);
