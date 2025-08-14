@@ -28,7 +28,7 @@ public class BlockAkashicRecord extends Block {
                     && tile.getPattern() != null && tile.getPattern().sigsEqual(key));
         var openPos = nil;
         if (clobbereePos != null) {
-           openPos = clobbereePos
+           openPos = clobbereePos;
         }
         else{
             openPos = AkashicFloodfiller.floodFillFor(herePos, level, 0.9f,
