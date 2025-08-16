@@ -35,9 +35,7 @@ public class BlockEmptyDirectrix extends BlockCircleComponent {
     @Override
     public ControlFlow acceptControlFlow(CastingImage imageIn, CircleCastEnv env, Direction enterDir, BlockPos pos,
         BlockState bs, ServerLevel world) {
-        var sign = world.random.nextBoolean()
-            ? bs.getValue(FACING)
-            : bs.getValue(FACING).getOpposite();
+        var sign =  bs.getValue(FACING);
         return new ControlFlow.Continue(imageIn, List.of(this.exitPositionFromDirection(pos, sign)));
     }
 
