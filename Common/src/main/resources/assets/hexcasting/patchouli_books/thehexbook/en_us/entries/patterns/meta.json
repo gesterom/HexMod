@@ -44,6 +44,14 @@
     },
     {
       "type": "hexcasting:pattern",
+      "op_id": "hexcasting:for_loop",
+      "anchor": "hexcasting:for_loop",
+      "input": "list of patterns, number",
+      "output": "list",
+      "text": "hexcasting.page.meta.for_loop.1"
+    },
+    {
+      "type": "hexcasting:pattern",
       "op_id": "hexcasting:halt",
       "anchor": "hexcasting:halt",
       "text": "hexcasting.page.meta.halt.1"
