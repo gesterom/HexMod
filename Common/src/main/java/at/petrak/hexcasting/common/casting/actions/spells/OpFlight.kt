@@ -33,7 +33,7 @@ class OpFlight(val type: Type) : SpellAction {
     ): SpellAction.Result {
         val target = args.getPlayer(0, argc)
         val theArg = args.getPositiveDouble(1, argc)
-        env.assertEntityInRange(target)
+        
 
         val cost = when (this.type) {
             Type.LimitRange -> theArg * MediaConstants.DUST_UNIT
@@ -42,11 +42,23 @@ class OpFlight(val type: Type) : SpellAction {
         }.roundToLong()
 
         // Convert to ticks
-        return SpellAction.Result(
-            Spell(this.type, target, theArg),
-            cost,
-            listOf(ParticleSpray(target.position(), Vec3(0.0, 2.0, 0.0), 0.0, 0.1))
-        )
+        if(this.type == Type.LimitRange) {
+            val origin = args.getVec3(2, argc)
+            env.assertPosInRangeForEditing(origin)
+            return SpellAction.Result(
+                Spell(this.type, target, theArg, origin),
+                cost,
+                listOf(ParticleSpray(target.position(), Vec3(0.0, 2.0, 0.0), 0.0, 0.1))
+            )  
+        }
+        else{
+            env.assertEntityInRange(target)
+            return SpellAction.Result(
+                Spell(this.type, target, theArg, target.position()),
+                cost,
+                listOf(ParticleSpray(target.position(), Vec3(0.0, 2.0, 0.0), 0.0, 0.1))
+            )
+        }
     }
 
     enum class Type {
@@ -55,7 +67,7 @@ class OpFlight(val type: Type) : SpellAction {
 
     }
 
-    data class Spell(val type: Type, val target: ServerPlayer, val theArg: Double) : RenderedSpell {
+    data class Spell(val type: Type, val target: ServerPlayer, val theArg: Double, val origin: BlockPos) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             if (target.abilities.mayfly) {
                 // Don't accidentally clobber someone else's flight
@@ -64,7 +76,6 @@ class OpFlight(val type: Type) : SpellAction {
             }
 
             val dim = target.level().dimension()
-            val origin = target.position()
 
             val flight = when (this.type) {
                 Type.LimitRange -> FlightAbility(-1, dim, origin, theArg)
@@ -77,7 +88,6 @@ class OpFlight(val type: Type) : SpellAction {
             target.onUpdateAbilities()
         }
     }
-
 
     companion object {
         // blocks from the edge
