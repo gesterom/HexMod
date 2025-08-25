@@ -24,6 +24,7 @@ import net.minecraft.world.phys.Vec3
 import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import net.minecraft.world.phys.Vec3
 
 class OpFlight(val type: Type) : SpellAction {
     override val argc = 2
@@ -67,7 +68,7 @@ class OpFlight(val type: Type) : SpellAction {
 
     }
 
-    data class Spell(val type: Type, val target: ServerPlayer, val theArg: Double, val origin: BlockPos) : RenderedSpell {
+    data class Spell(val type: Type, val target: ServerPlayer, val theArg: Double, val origin: Vec3) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
             if (target.abilities.mayfly) {
                 // Don't accidentally clobber someone else's flight
