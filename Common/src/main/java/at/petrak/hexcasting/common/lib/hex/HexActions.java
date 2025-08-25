@@ -333,6 +333,9 @@ public class HexActions {
     public static final ActionRegistryEntry FLIGHT$RANGE = make("flight/range",
         new ActionRegistryEntry(HexPattern.fromAngles("awawaawq", HexDir.SOUTH_WEST),
             new OpFlight(OpFlight.Type.LimitRange)));
+    public static final ActionRegistryEntry FLIGHT$RANGE_ORIGIN = make("flight/range_origin",
+        new ActionRegistryEntry(HexPattern.fromAngles("awawaawqded", HexDir.SOUTH_WEST),
+            new OpFlight(OpFlight.Type.LimitRangeOrigin)));
     public static final ActionRegistryEntry FLIGHT$TIME = make("flight/time",
         new ActionRegistryEntry(HexPattern.fromAngles("dwdwdewq", HexDir.NORTH_EAST),
             new OpFlight(OpFlight.Type.LimitTime)));
@@ -538,6 +541,8 @@ public class HexActions {
         new OperationAction(HexPattern.fromAngles("deeed", HexDir.NORTH_WEST)));
     public static final ActionRegistryEntry FOR_EACH = make("for_each",
         new ActionRegistryEntry(HexPattern.fromAngles("dadad", HexDir.NORTH_EAST), OpForEach.INSTANCE));
+    public static final ActionRegistryEntry FOR_LOOP = make("for_loop",
+        new ActionRegistryEntry(HexPattern.fromAngles("dadadedadad", HexDir.NORTH_EAST), OpForLoop.INSTANCE));        
     //    public static final ActionRegistryEntry LIST_SIZE = make("list_size",
 //        new ActionRegistryEntry(HexPattern.fromAngles("aqaeaq", HexDir.EAST), OpListSize.INSTANCE));
     public static final ActionRegistryEntry SINGLETON = make("singleton",

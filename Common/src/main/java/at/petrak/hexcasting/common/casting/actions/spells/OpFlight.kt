@@ -28,7 +28,7 @@ import at.petrak.hexcasting.api.casting.getVec3
 
 class OpFlight(val type: Type) : SpellAction {
     override val argc: Int
-        get() = if (this.type == Type.LimitRange) { 3 } else { 2 }
+        get() = if (this.type == Type.LimitRangeOrigin) { 3 } else { 2 }
     override fun execute(
             args: List<Iota>,
             env: CastingEnvironment
@@ -39,12 +39,13 @@ class OpFlight(val type: Type) : SpellAction {
 
         val cost = when (this.type) {
             Type.LimitRange -> theArg * MediaConstants.DUST_UNIT
+            Type.LimitRangeOrigin -> theArg * MediaConstants.DUST_UNIT
             // A second of flight should cost 1 shard
             Type.LimitTime -> theArg * MediaConstants.SHARD_UNIT
         }.roundToLong()
 
         // Convert to ticks
-        if(this.type == Type.LimitRange) {
+        if(this.type == Type.LimitRangeOrigin) {
             val origin = args.getVec3(2, argc)
             env.assertVecInRange(origin)
             return SpellAction.Result(
@@ -65,6 +66,7 @@ class OpFlight(val type: Type) : SpellAction {
 
     enum class Type {
         LimitRange,
+        LimitRangeOrigin,
         LimitTime;
 
     }
@@ -81,6 +83,7 @@ class OpFlight(val type: Type) : SpellAction {
 
             val flight = when (this.type) {
                 Type.LimitRange -> FlightAbility(-1, dim, origin, theArg)
+                Type.LimitRangeOrigin -> FlightAbility(-1, dim, origin, theArg)
                 Type.LimitTime -> FlightAbility((theArg * 20.0).roundToInt(), dim, origin, -1.0)
             }
 
