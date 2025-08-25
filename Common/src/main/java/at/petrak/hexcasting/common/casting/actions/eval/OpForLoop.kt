@@ -10,7 +10,7 @@ object OpForLoop : ConstMediaAction {
     override val argc = 1
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         var n = args.getDouble(0, argc)
-        var res = List(n) { DoubleIota(it) }
+        var res = List(n) { DoubleIota(it * 1.0) }
         return res
     }
 }
