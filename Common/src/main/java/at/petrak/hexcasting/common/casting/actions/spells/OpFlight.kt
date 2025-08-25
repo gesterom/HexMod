@@ -27,7 +27,7 @@ import kotlin.math.roundToLong
 import net.minecraft.world.phys.Vec3
 
 class OpFlight(val type: Type) : SpellAction {
-    override val argc = 2
+    override val argc = 3
     override fun execute(
             args: List<Iota>,
             env: CastingEnvironment
