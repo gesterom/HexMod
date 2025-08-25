@@ -57,6 +57,14 @@
     },
     {
       "type": "hexcasting:pattern",
+      "op_id": "hexcasting:for_loop",
+      "anchor": "hexcasting:for_loop",
+      "input": "number",
+      "output": "list",
+      "text": "hexcasting.page.meta.for_loop.1"
+    },
+    {
+      "type": "hexcasting:pattern",
       "op_id": "hexcasting:singleton",
       "anchor": "hexcasting:singleton",
       "input": "any",

@@ -12,6 +12,6 @@ object OpForLoop : ConstMediaAction {
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val n = args.getDouble(0, argc).toInt()  // Truncate the double to an integer
         val res = List(n) { i -> DoubleIota(i.toDouble()) }  // Create list of DoubleIota(0.0), ..., DoubleIota(n-1.0)
-        return res
+        return res.asActionResult
     }
 }
