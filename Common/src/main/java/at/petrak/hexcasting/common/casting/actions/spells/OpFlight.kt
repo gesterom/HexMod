@@ -45,7 +45,7 @@ class OpFlight(val type: Type) : SpellAction {
         // Convert to ticks
         if(this.type == Type.LimitRange) {
             val origin = args.getVec3(2, argc)
-            env.assertPosInRangeForEditing(origin)
+            env.assertVecInRange(origin)
             return SpellAction.Result(
                 Spell(this.type, target, theArg, origin),
                 cost,
