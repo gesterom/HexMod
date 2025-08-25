@@ -27,7 +27,8 @@ import kotlin.math.roundToLong
 import at.petrak.hexcasting.api.casting.getVec3
 
 class OpFlight(val type: Type) : SpellAction {
-    override val argc = 3
+    override val argc: Int
+        get() = if (this.type == Type.LimitRange) { 3 } else { 2 }
     override fun execute(
             args: List<Iota>,
             env: CastingEnvironment
