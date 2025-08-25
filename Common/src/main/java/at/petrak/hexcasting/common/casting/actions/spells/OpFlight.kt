@@ -24,7 +24,6 @@ import net.minecraft.world.phys.Vec3
 import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
-import net.minecraft.world.phys.Vec3
 
 class OpFlight(val type: Type) : SpellAction {
     override val argc = 3
